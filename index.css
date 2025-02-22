@@ -1,9 +1,9 @@
 :root
 {
     --darkGreen : #3D8D7A;
-    --lightGreen : #9dda8b;
+    --lightGreen : #5acfb4;
     --white : #FBFFE4;
-    --orange : #f17516;
+    --orange : #e68a44;
     --font : "Playwrite IT Moderna", serif;
 }
 
@@ -47,17 +47,31 @@ input.filter
     border-bottom: solid 1px var(--white);
 }
 
+input::placeholder
+{
+    color: var(--lightGreen);
+}
+
 button
 {
     font-family: var(--font);
     margin-top: 10px;
     margin-bottom: 10px;
     height: 30px;
+    border-radius: 5px;
+}
+
+button:hover
+{
+    cursor: pointer;
 }
 
 button.add
 {
     width: 100px;
+    background-color: var(--orange);
+    border: none;
+    color: var(--white);
 }
 
 button.clear
@@ -70,6 +84,31 @@ button.clear
 
 ul
 {
-    margin: 0%;
+    margin-top: 10px;
+    margin-bottom: 0%;
     padding: 0%;
+}
+
+li
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3px;
+    list-style: none;
+    border: solid 1px var(--white);
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow-wrap: anywhere;
+}
+
+li button
+{
+    background: none;
+    border: solid 1px var(--orange);
+    color: var(--orange);
+    height: 20px;
+    width: 20px;
+    font-size: 10px;
+    margin-left: 5px;
 }
