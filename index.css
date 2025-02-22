@@ -1,0 +1,75 @@
+:root
+{
+    --darkGreen : #3D8D7A;
+    --lightGreen : #9dda8b;
+    --white : #FBFFE4;
+    --orange : #f17516;
+    --font : "Playwrite IT Moderna", serif;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    font-family: var(--font);
+    background-color: var(--darkGreen);
+    color: var(--white);
+}
+
+main
+{
+    width: 300px;
+}
+
+input
+{
+    width: 100%;
+    height: 30px;
+    font-family: var(--font);
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+input.insert
+{
+    background-color: var(--white);
+    border-radius: 10px;
+    color: var(--orange);
+}
+
+input.filter
+{
+    background: none;
+    color: var(--white);
+    border-bottom: solid 1px var(--white);
+}
+
+button
+{
+    font-family: var(--font);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+}
+
+button.add
+{
+    width: 100px;
+}
+
+button.clear
+{
+    width: 100%;
+    background: none;
+    border: solid 1px var(--white);
+    color: var(--white);
+}
+
+ul
+{
+    margin: 0%;
+    padding: 0%;
+}
