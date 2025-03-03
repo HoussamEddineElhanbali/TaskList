@@ -11,12 +11,6 @@ const liContainer = document.querySelector(".liContainer");
 
 addButton.addEventListener("click",createLi);
 
-clearButton.addEventListener("click",()=>{revealPopUp("block");});
-
-popUpYesButton.addEventListener("click",removeAllLi);
-
-popUpNoButton.addEventListener("click",()=>{revealPopUp("none");});
-
 function createLi()
 {
     if(taskInput.value === "")
@@ -42,13 +36,40 @@ function removeLi(xButton)
     xButton.target.parentElement.remove();
 }
 
-function revealPopUp(state)
-{
-    popUp.style.display = state;
-}
+clearButton.addEventListener("click",()=>{revealPopUp("block");});
+
+popUpNoButton.addEventListener("click",()=>{revealPopUp("none");});
+
+popUpYesButton.addEventListener("click",removeAllLi);
 
 function removeAllLi()
 {
     liContainer.innerHTML = "";
     revealPopUp("none");
+}
+
+function revealPopUp(state)
+{
+    popUp.style.display = state;
+}
+
+searchInput.addEventListener("input",searchForWord);
+
+function searchForWord()
+{
+    liContainer.childNodes.forEach(childLi =>
+    {
+        let searchValue = searchInput.value;
+        let liValue = childLi.firstChild.textContent;
+
+        if(liValue.toLowerCase().includes(searchValue.toLowerCase()))
+        {
+            childLi.style.display = "flex";
+        }
+        else
+        {
+            childLi.style.display = "none";
+        }
+    }
+    );
 }
