@@ -11,6 +11,8 @@ const liContainer = document.querySelector(".liContainer");
 
 addButton.addEventListener("click",createLi);
 
+taskInput.addEventListener("keydown",(event) => {if(event.key === "Enter"){createLi()}});
+
 function createLi()
 {
     if(taskInput.value === "")
