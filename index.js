@@ -7,30 +7,40 @@ const clearButton = document.querySelector(".clear");
 const popUp = document.querySelector(".popUp");
 const popUpYesButton = document.querySelector(".popUpContainer").childNodes[3];
 const popUpNoButton = document.querySelector(".popUpContainer").childNodes[5];
-const liContainer = document.querySelector(".liContainer");
+const ulContainer = document.querySelector(".liContainer");
 
-addButton.addEventListener("click",createLi);
+addButton.addEventListener("click",addTask);
 
-taskInput.addEventListener("keydown",(event) => {if(event.key === "Enter"){createLi()}});
+taskInput.addEventListener("keydown",(event) => {if(event.key === "Enter"){addTask()}});
 
-function createLi()
+function addTask()
 {
-    if(taskInput.value === "")
+    let taskText = taskInput.value;
+
+    console.log(taskText);
+
+    createLi(taskText);
+    storeLi(taskText);
+
+    taskInput.value = "";
+}
+
+function createLi(taskText)
+{
+    if(taskText === "")
     {
         return;
     }
 
     let liElement = document.createElement("li");
-    liElement.innerHTML  = taskInput.value;
+    liElement.innerHTML  = taskText;
 
     let buttonElement = document.createElement("button");
     buttonElement.innerHTML = "X";
     buttonElement.addEventListener("click",removeLi);
     
     liElement.appendChild(buttonElement);
-    liContainer.appendChild(liElement);
-
-    taskInput.value = "";
+    ulContainer.appendChild(liElement);
 }
 
 function removeLi(xButton)
@@ -44,22 +54,23 @@ popUpNoButton.addEventListener("click",()=>{revealPopUp("none");});
 
 popUpYesButton.addEventListener("click",removeAllLi);
 
-function removeAllLi()
-{
-    liContainer.innerHTML = "";
-    revealPopUp("none");
-}
-
 function revealPopUp(state)
 {
     popUp.style.display = state;
+}
+
+function removeAllLi()
+{
+    ulContainer.innerHTML = "";
+    revealPopUp("none");
+    clearStorage();
 }
 
 searchInput.addEventListener("input",searchForWord);
 
 function searchForWord()
 {
-    liContainer.childNodes.forEach(childLi =>
+    ulContainer.childNodes.forEach(childLi =>
     {
         let searchValue = searchInput.value;
         let liValue = childLi.firstChild.textContent;
@@ -75,3 +86,42 @@ function searchForWord()
     }
     );
 }
+
+function storeLi(task)
+{
+    let allTasks
+
+    if(localStorage.key("item") === null)
+    {
+        allTasks = [];
+    }
+    else
+    {
+        allTasks = JSON.parse(localStorage.getItem("item"));
+    }
+
+    allTasks.push(task);
+
+    localStorage.setItem("item",JSON.stringify(allTasks));
+}
+
+function clearStorage()
+{
+    localStorage.setItem("item","[]");
+}
+
+function initiateTaskList()
+{
+    if(localStorage.key("item") !== null)
+    {
+        let StoredTasks = JSON.parse(localStorage.getItem("item"));
+
+        StoredTasks.forEach(item => {createLi(item)});
+    }
+    else
+    {
+        return;
+    }
+}
+
+initiateTaskList();
