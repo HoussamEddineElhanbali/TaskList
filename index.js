@@ -46,6 +46,12 @@ function createLi(taskText)
 function removeLi(xButton)
 {
     xButton.target.parentElement.remove();
+
+    let taskText = xButton.target.parentElement.firstChild.textContent;
+    let allTasks = JSON.parse(localStorage.getItem("item"));
+
+    allTasks = allTasks.filter(task => task !== taskText);
+    localStorage.setItem("item", JSON.stringify(allTasks));
 }
 
 clearButton.addEventListener("click",()=>{revealPopUp("block");});
